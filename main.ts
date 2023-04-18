@@ -34,7 +34,7 @@ class MyStack extends TerraformStack {
 
         new storageDefaultObjectAcl.StorageDefaultObjectAcl(this, "default-acl", {
             bucket: test_bucket.name,
-            roleEntity: ["allUsers"],
+            roleEntity: ["READER:allUsers"],
         })
 
         new storageBucketObject.StorageBucketObject(this, "index", {
