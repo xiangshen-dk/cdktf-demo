@@ -1,0 +1,10 @@
+steps:
+- name: 'hashicorp/jsii-terraform'
+  entrypoint: sh
+  args: ["-c","npm install && npm install -g cdktf-cli"]
+- name: 'hashicorp/jsii-terraform'
+  entrypoint: sh
+  args: ["-c","cdktf synth"]    
+- name: 'hashicorp/jsii-terraform'
+  entrypoint: sh
+  args: ["-c","cdktf deploy --auto-approve"]  
