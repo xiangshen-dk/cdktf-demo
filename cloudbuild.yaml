@@ -1,10 +1,7 @@
 steps:
 - name: 'hashicorp/jsii-terraform'
   entrypoint: sh
-  args: ["-c","npm install && npm install -g cdktf-cli"]
-- name: 'hashicorp/jsii-terraform'
-  entrypoint: sh
-  args: ["-c","cdktf synth"]    
-- name: 'hashicorp/jsii-terraform'
-  entrypoint: sh
-  args: ["-c","cdktf deploy --auto-approve"]  
+  args: ["-c","chmod +x *.sh && ./cdktf.sh"]
+  env:
+  - 'BUILD_TYPE=$_BUILD_TYPE'
+  - 'PROJECT_ID=$PROJECT_ID'
