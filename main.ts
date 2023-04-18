@@ -40,7 +40,7 @@ class MyStack extends TerraformStack {
         new storageBucketObject.StorageBucketObject(this, "index", {
             name: "index.html",
             bucket: test_bucket.name,
-            source: "src/index.html",
+            source: "./src/index.html",
         })
     }
 }
