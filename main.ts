@@ -1,7 +1,7 @@
 import { Construct } from "constructs";
 import { App, TerraformStack, GcsBackend } from "cdktf";
 import { GoogleProvider } from "@cdktf/provider-google/lib/provider";
-import { storageBucket, storageBucketObject, storageDefaultObjectAcl } from "@cdktf/provider-google";
+import { storageBucket } from "@cdktf/provider-google";
 
 class MyStack extends TerraformStack {
     constructor(scope: Construct, id: string) {
@@ -22,26 +22,11 @@ class MyStack extends TerraformStack {
                 project: project_id,
             });
 
-        const test_bucket = new storageBucket.StorageBucket(this, "test-bucket", {
+        new storageBucket.StorageBucket(this, "test-bucket", {
             name: `test-bucket-${project_id}`,
-            location: "US",
-            website: {
-                mainPageSuffix: "index.html",
-                // Use the same page for 404
-                notFoundPage: "index.html",
-            }
+            location: "US"
         })
 
-        new storageDefaultObjectAcl.StorageDefaultObjectAcl(this, "default-acl", {
-            bucket: test_bucket.name,
-            roleEntity: ["READER:allUsers"],
-        })
-
-        new storageBucketObject.StorageBucketObject(this, "index", {
-            name: "index.html",
-            bucket: test_bucket.name,
-            source: "./src/index.html",
-        })
     }
 }
 
